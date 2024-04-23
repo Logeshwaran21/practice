@@ -1,5 +1,6 @@
 #Filtering Nulls
 from pyspark.sql import SparkSession
+from pyspark.sql.functions import coalesce
 
 # Create a SparkSession
 spark = SparkSession.builder \
@@ -29,8 +30,6 @@ filled_df = df.fillna({"Name": "Unknown", "Age": 0})
 filled_df.show()
 
 #3. Using Coalesce
-from pyspark.sql.functions import coalesce
-
 # Create a new column with non-NULL values
 coalesced_df = df.withColumn("NewName", coalesce(df["Name"], df["Age"]))
 
